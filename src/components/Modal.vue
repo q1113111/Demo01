@@ -2,10 +2,10 @@
    <div class="modal" :class="isShow ? 'is-show' : ''">
       <div class="modal__wrap">
          <h1 class="modal__title">提示</h1>
-         <p class="modal__txt">確定花費330.00元</p>
-         <p class="modal__txt">成為12個月的白银會員嗎?</p>
+         <p class="modal__txt">確定花費{{listData.tag}}元</p>
+         <p class="modal__txt">成為12個月的{{listData.title}}嗎?</p>
          <div class="modal__group">
-            <button class="modal__btn">取消</button>
+            <button class="modal__btn" @click="cancelHandler()">取消</button>
             <button class="modal__btn" @click="sumbitHandler()">確認</button>
          </div>
       </div>
@@ -13,6 +13,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+const show = false
 export default {
   computed: {
     ...mapState('List', {
@@ -22,8 +23,10 @@ export default {
   },
   methods: {
     sumbitHandler () {
-      const show = false
       this.$store.commit('List/PUSHLIST', this.listData)
+      this.$store.commit('List/SETSHOW', show)
+    },
+    cancelHandler () {
       this.$store.commit('List/SETSHOW', show)
     }
   }
