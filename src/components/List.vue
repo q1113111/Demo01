@@ -68,6 +68,7 @@ export default {
       }
       &:hover .list__box:nth-child(3) {
          opacity: 1;
+         visibility: visible;
          transform: translateY(-15px);
       }
    }
@@ -91,7 +92,7 @@ export default {
    }
    &__box:nth-child(3) {
       opacity: 0;
-      // padding-right: 0;
+      visibility: hidden;
       transition: 0.3s;
    }
    &__tag {
