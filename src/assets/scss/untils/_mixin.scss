@@ -1,5 +1,10 @@
-@mixin position() {
-    position: absolute;
-    left: 24px;
-    bottom: 32px;
+@mixin btn($bgColor:$white,$color:$light-primary,$radius:40px,) {
+    cursor: pointer;
+    border: none;
+    border-radius: $radius;
+    background-color: $bgColor;
+    color: $color;
+    &:focus {
+        outline: none;
+    }
 }

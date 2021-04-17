@@ -32,8 +32,8 @@ h2 {
 .icon {
   position: absolute;
   left: 24px;
-  z-index: 4;
-  bottom: 47px;
+  z-index: 3;
+  bottom: 36px;
 }
 .curve {
   z-index: 3;
@@ -46,13 +46,8 @@ h2 {
   height: 90px;
 }
 .btn {
-  padding: 10px 18px;
-  background-color: $white;
-  border: none;
   opacity: 1;
+  padding: 10px 18px;
   font-size: 1rem;
-  border-radius: 40px;
-  &:focus {
-      outline: none;
-  }
+  @include btn();
 }

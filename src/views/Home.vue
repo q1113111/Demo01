@@ -1,37 +1,31 @@
 <template>
    <div>
+      <Modal />
       <div class="customer">
          <img :src="src" alt="" />
       </div>
-      <div class="top" >
+      <div class="top">
          <p class="top__txt">VIP</p>
       </div>
       <Banner />
-      <List :show.sync="classShow"/>
-      <Nav />
+      <List />
    </div>
 </template>
 
 <script>
 import Banner from '@/components/Banner'
 import List from '@/components/List'
-import Nav from '@/components/Nav'
+import Modal from '@/components/Modal'
 export default {
   data () {
     return {
-      classShow: '',
       src: require('@/assets/img/icon/组 8.svg')
     }
   },
   components: {
     Banner,
     List,
-    Nav
-  },
-  methods: {
-    // classShow (val) {
-    //   this.show = val
-    // }
+    Modal
   }
 }
 </script>
@@ -49,6 +43,7 @@ export default {
 .customer {
    position: fixed;
    z-index: 888;
+   cursor: pointer;
    bottom: 116px;
    right: 16px;
    width: 52px;

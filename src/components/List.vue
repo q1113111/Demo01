@@ -15,7 +15,7 @@
             </div>
             <div class="list__box">
                <div class="txt">{{ item.count }}</div>
-               <button @click="showHandler()" class="btn">立即加入</button>
+               <button @click="showHandler(item,index)" class="btn">立即加入</button>
             </div>
          </div>
       </li>
@@ -23,65 +23,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  name: 'List',
   data () {
     return {
-      show: true,
-      List: [
-        {
-          bgc: require('@/assets/img/photo/會員底圖-06.png'),
-          icon: require('@/assets/img/icon/蒙版组 35.svg'),
-          title: '白银会员',
-          txt: '每日可领取10次任务',
-          tag: '￥330.00',
-          count: '[1.20元/条]'
-        },
-        {
-          bgc: require('@/assets/img/photo/會員底圖-02.png'),
-          icon: require('@/assets/img/icon/蒙版组 36.svg'),
-          title: '黄金会员',
-          txt: '每日可领取19次任务',
-          tag: '￥660.00',
-          count: '[1.20元/条]'
-        },
-        {
-          bgc: require('@/assets/img/photo/會員底圖-03.png'),
-          icon: require('@/assets/img/icon/蒙版组 42.svg'),
-          title: '铂金会员',
-          txt: '每日可领取28次任务',
-          tag: '￥990.00',
-          count: '[1.20元/条]'
-        },
-        {
-          bgc: require('@/assets/img/photo/會員底圖-01.png'),
-          icon: require('@/assets/img/icon/蒙版组 33.svg'),
-          title: '钻石会员',
-          txt: '每日可领取99次任务',
-          tag: '￥2990.00',
-          count: '[1.20元/条]'
-        },
-        {
-          bgc: require('@/assets/img/photo/會員底圖-05.png'),
-          icon: require('@/assets/img/icon/蒙版组 40.svg'),
-          title: '荣耀会员',
-          txt: '每日可领取228次任务',
-          tag: '￥5940.00',
-          count: '[1.20元/条]'
-        },
-        {
-          bgc: require('@/assets/img/photo/會員底圖-07.png'),
-          icon: require('@/assets/img/icon/蒙版组 44.svg'),
-          title: '尊耀会员',
-          txt: '每日可领取338次任务',
-          tag: '￥9899.00',
-          count: '[1.20元/条]'
-        }
-      ]
+      show: true
     }
   },
+  computed: {
+    ...mapGetters('List', {
+      List: 'rankList'
+    })
+  },
   methods: {
-    showHandler () {
-      this.$emit('update:show', this.show)
+    showHandler (item, index) {
+      this.$store.commit('List/SETINDEX', index)
+      this.$store.commit('List/SETSHOW', this.show)
+      this.$store.commit('List/SETLIST', item)
     }
   }
 }
@@ -94,17 +53,12 @@ export default {
       position: relative;
       z-index: 2;
       max-height: 118px;
-      overflow: hidden;
       transition: 0.3s;
       &:nth-child(even) {
          background-color: $deep;
          .curve{
                background: radial-gradient(circle at top right, transparent 91px, $primary 0) top right;
          }
-      }
-      &::before {
-         content: "";
-         @include position();
       }
       &:hover {
          max-height: 148px;
@@ -121,26 +75,29 @@ export default {
       padding: 24px 30px 24px;
    }
    &__header {
-      padding-left: 25px;
+      padding-left: 26px;
    }
    &__box {
       display: flex;
-      padding: 0 30px;
+      padding-left: 26px;
       justify-content: space-between;
       align-items: flex-end;
       .txt {
          opacity: 0.6;
       }
       .btn {
-         margin-right: -10px;
+         margin-right: -8px;
       }
    }
    &__box:nth-child(3) {
       opacity: 0;
+      // padding-right: 0;
       transition: 0.3s;
    }
    &__tag {
       transition: 0.3s;
+      width: 92px;
+      text-align: right;
    }
 }
 </style>
